@@ -7,8 +7,10 @@
 	входити в неї тільки один раз.
 */
 
-function main() {
+function main(): number {
 	return 1
 }
+
+console.log(main())
 
 export default main
