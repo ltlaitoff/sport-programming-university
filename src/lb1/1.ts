@@ -7,10 +7,62 @@
 	входити в неї тільки один раз.
 */
 
-function main(): number {
-	return 1
+/* Its genious */
+function chatVersion(arr: number[]): number {
+	let summ = 1
+
+	for (const num of arr) {
+		if (num > summ) {
+			break
+		}
+
+		summ += num
+	}
+
+	return summ
 }
 
-console.log(main())
+/* Its our :D */
+function main(set: Set<number>, array: number[]) {
+	if (array.length === 1) return array
 
-export default main
+	array.forEach(item => set.delete(item))
+
+	const firstElement = array[0]
+	const slicedArray = array.slice(1)
+
+	main(set, slicedArray)
+
+	slicedArray.map((_, index, array) => {
+		const arr = [...array]
+		arr[index] += firstElement
+		main(set, arr)
+	})
+
+	return set
+}
+
+const a = [1, 2, 7, 10]
+
+console.time('my')
+
+const set = new Set(
+	Array.from(
+		{ length: a.reduce((acc, item) => acc + item, 0) + 1 },
+		(_: any, index: number) => index + 1
+	)
+)
+
+main(set, a)
+
+console.log('our: ', Array.from(set)[0])
+
+console.timeEnd('my')
+
+console.time('chat')
+
+console.log('chat:', chatVersion(a))
+
+console.timeEnd('chat')
+
+export default chatVersion
