@@ -3,5 +3,6 @@ go 1.22.0
 use (
 	./lb1
 	./lb2
+	./lb3
 	./main
 )
